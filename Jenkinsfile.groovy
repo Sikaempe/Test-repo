@@ -1,5 +1,10 @@
 @Library(["vpp", "bop@auto-channel","bop-release"]) _
 
+@NonCPS
+def setupLogging() {
+    JenkinsUtils.log = { String msg-> println msg }
+}
+
     stage('TestGit') 
     {
     
