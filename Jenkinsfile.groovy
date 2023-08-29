@@ -2,12 +2,13 @@
 
 @NonCPS
 def setupLogging() {
-    JenkinsUtils.log = { String msg-> println msg }
+    util.JenkinsUtils.log = { String msg-> println msg }
 }
 
     stage('TestGit') 
     {
-    
+        setupLogging
+        
         def xChannel = auto_channel()
         
         echo "channel: " + xChannel
