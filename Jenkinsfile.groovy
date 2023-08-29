@@ -3,7 +3,7 @@
 
     stage('TestGit') 
     {
-        add_release_links()
+        util.AutoChannel.isGitFlow = true
 
         def xChannel = auto_channel()
         
