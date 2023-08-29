@@ -1,8 +1,8 @@
-@Library(["vpp", "bop","bop-release"]) _
+@Library(["vpp", "bop@auto-channel","bop-release"]) _
+
 
     stage('TestGit') 
     {
-    
         def xChannel = auto_channel()
         
         echo "channel: " + xChannel
