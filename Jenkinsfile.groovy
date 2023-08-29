@@ -1,4 +1,4 @@
-@Library(["vpp", "bop","bop-release"]) _
+@Library(["vpp", "bop@auto-channel","bop-release"]) _
 
     stage('TestGit') 
     {
