@@ -3,6 +3,8 @@
 
     stage('TestGit') 
     {
+        add_release_links()
+
         def xChannel = auto_channel()
         
         echo "channel: " + xChannel
