@@ -1,8 +1,10 @@
-@Library(["vpp", "bop","bop-release"]) _
+@Library(["vpp", "bop@auto-channel","bop-release"]) _
+
 
     stage('TestGit') 
     {
-    
+        util.AutoChannel.isGitFlow = true
+
         def xChannel = auto_channel()
         
         echo "channel: " + xChannel
