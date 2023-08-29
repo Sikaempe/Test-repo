@@ -1,13 +1,8 @@
 @Library(["vpp", "bop@auto-channel","bop-release"]) _
 
-@NonCPS
-def setupLogging() {
-}
 
     stage('TestGit') 
     {
-    util.JenkinsUtils.log = { String msg-> println msg }
-
         def xChannel = auto_channel()
         
         echo "channel: " + xChannel
