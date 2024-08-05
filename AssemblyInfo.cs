@@ -18,5 +18,5 @@ using System.Reflection;
 // by using the '*' as shown below:
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyVersion("0.13.0.0")]
-[assembly: AssemblyFileVersion("0.13.0.0")]
-[assembly: AssemblyInformationalVersion("0.13.0.0")]
+[assembly: AssemblyFileVersion("0.13.1.0")]
+[assembly: AssemblyInformationalVersion("0.13.1.0")]
