@@ -1,0 +1,11 @@
+pipelines:
+  default:
+    - step:
+        name: Sync to GitHub
+        image: atlassian/default-image:2
+        script:
+          - git config --global user.email "simon.kaemper@btc-ag.com"
+          - git config --global user.name "sikaempe"
+          - git remote add github https://$GITHUB_USERNAME:$GITHUB_TOKEN@$GITHUB_REPO
+          - git push -u github --all
+          - git push -u github --tags
