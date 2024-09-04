@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        BITBUCKET_URL = 'http://bitbucket:7990/scm/sync/syncme.git'
+        BITBUCKET_URL = 'https://bitbucket.e-konzern.de/scm/btcvpp/test-repo.git'
         GITHUB_REPO_URL = 'https://github.com/Sikaempe/test-repo.git'
     }
 
