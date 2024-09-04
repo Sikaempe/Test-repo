@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     echo "Cleaning up the workspace to avoid directory conflicts..."
-                    deleteDir() // This will delete the contents of the workspace
+                    deleteDir()
                 }
             }
         }
