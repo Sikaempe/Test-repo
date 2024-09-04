@@ -35,7 +35,7 @@ pipeline {
                     script {
                         echo "Adding GitHub remote..."
                         sh """
-                            cd syncme
+                            cd test-repo
                             git remote add github https://$GITHUB_USERNAME:$GITHUB_TOKEN@$GITHUB_REPO_URL
                         """
                     }
@@ -48,7 +48,7 @@ pipeline {
                 script {
                     echo "Pushing all branches to GitHub..."
                     sh """
-                        cd syncme
+                        cd test-repo
                         git push github --all
                     """
                 }
@@ -60,7 +60,7 @@ pipeline {
                 script {
                     echo "Pushing all tags to GitHub..."
                     sh """
-                        cd syncme
+                        cd test-repo
                         git push github --tags
                     """
                 }
