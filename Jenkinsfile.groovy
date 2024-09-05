@@ -7,39 +7,16 @@ pipeline {
     }
 
     stages {
-        stage('Cleanup Workspace') {
-            steps {
-                script {
-                    echo "Cleaning up the workspace to avoid directory conflicts..."
-                    deleteDir()
-                }
-            }
-        }
-
-        stage('Clone Bitbucket Repository') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'bitbucket-token', usernameVariable: 'BITBUCKET_USERNAME', passwordVariable: 'BITBUCKET_TOKEN')]) {
-                    script {
-                        echo "Cloning Bitbucket repository..."
-                        sh """
-                            git clone https://$BITBUCKET_USERNAME:$BITBUCKET_TOKEN@$BITBUCKET_URL
-                        """
-                    }
-                }
-            }
-        }
-
         stage('Add GitHub Remote') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_TOKEN')]) {
-                    script {
-                        echo "Adding GitHub remote..."
-                        sh """
-                            cd test-repo
-                            git remote add github https://$GITHUB_USERNAME:$GITHUB_TOKEN@$GITHUB_REPO_URL
-                        """
-                    }
+                
+                script {
+                    echo "Adding GitHub remote..."
+                    sh """
+                        git remote add github https://$GITHUB_REPO_URL
+                    """
                 }
+                
             }
         }
 
@@ -48,7 +25,6 @@ pipeline {
                 script {
                     echo "Pushing all branches to GitHub..."
                     sh """
-                        cd test-repo
                         git push github --all
                     """
                 }
@@ -60,7 +36,6 @@ pipeline {
                 script {
                     echo "Pushing all tags to GitHub..."
                     sh """
-                        cd test-repo
                         git push github --tags
                     """
                 }
