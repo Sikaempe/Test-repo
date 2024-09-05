@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         BITBUCKET_URL = 'https://bitbucket.e-konzern.de/scm/btcvpp/test-repo.git'
-        GITHUB_REPO_URL = 'https://github.com/Sikaempe/test-repo.git'
+        GITHUB_REPO_URL = 'github.com/Sikaempe/test-repo.git'
     }
 
     stages {
