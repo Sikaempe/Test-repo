@@ -31,7 +31,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'github-token-simon', variable: 'GITHUB_TOKEN')]) {
                         sh """
                             if git remote | grep -q github; then
-                                git remote add https://${GITHUB_TOKEN}@github.com/Sikaempe/test-repo.git
+                                git remote add --fetch https://${GITHUB_TOKEN}@github.com/Sikaempe/test-repo.git
                             fi
                         """
                     }
