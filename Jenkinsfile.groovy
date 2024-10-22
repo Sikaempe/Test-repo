@@ -1,22 +1,41 @@
 pipeline {
-    agent any
+    agent { label 'linux&&azure' }
 
     environment {
         BITBUCKET_URL = 'https://bitbucket.e-konzern.de/scm/btcvpp/test-repo.git'
-        GITHUB_REPO_URL = 'github.com/Sikaempe/test-repo.git'
+        GITHUB_REPO_URL = 'https://github.com/Sikaempe/test-repo.git'
     }
 
     stages {
+        stage('Clone Bitbucket Repository') {
+            steps {
+                script {
+                    echo "Cloning Bitbucket repository..."
+                    withCredentials([usernamePassword(credentialsId: 'scm-default', passwordVariable: 'BITBUCKET_PASS', usernameVariable: 'BITBUCKET_USER')]) {
+                        sh """
+                            if [ ! -d "test-repo" ]; then
+                                git clone https://$BITBUCKET_USER:$BITBUCKET_PASS@bitbucket.e-konzern.de/scm/btcvpp/test-repo.git test-repo
+                            else
+                                echo "Repository already cloned."
+                            fi
+                        """
+                    }
+                }
+            }
+        }
+
         stage('Add GitHub Remote') {
             steps {
-                
                 script {
                     echo "Adding GitHub remote..."
-                    sh """
-                        git remote add github https://$GITHUB_REPO_URL
-                    """
+                    withCredentials([string(credentialsId: 'github-token-simon', variable: 'GITHUB_TOKEN')]) {
+                        sh """
+                            if git remote | grep -q github; then
+                                git remote add https://${GITHUB_TOKEN}@github.com/Sikaempe/test-repo.git
+                            fi
+                        """
+                    }
                 }
-                
             }
         }
 
@@ -24,9 +43,11 @@ pipeline {
             steps {
                 script {
                     echo "Pushing all branches to GitHub..."
-                    sh """
-                        git push github --all
-                    """
+                    withCredentials([string(credentialsId: 'github-token-simon', variable: 'GITHUB_TOKEN')]) {
+                        sh """
+                            git push https://${GITHUB_TOKEN}@github.com/Sikaempe/test-repo.git --all
+                        """
+                    }
                 }
             }
         }
@@ -35,9 +56,11 @@ pipeline {
             steps {
                 script {
                     echo "Pushing all tags to GitHub..."
-                    sh """
-                        git push github --tags
-                    """
+                    withCredentials([string(credentialsId: 'github-token-simon', variable: 'GITHUB_TOKEN')]) {
+                        sh """
+                            git push https://${GITHUB_TOKEN}@github.com/Sikaempe/test-repo.git --tags
+                        """
+                    }
                 }
             }
         }
